@@ -1,9 +1,29 @@
 .mainContainer{
+   align-items: center;
+   display: block;
+}
+.secondContainer{
     justify-content: center;
     display: flex;
     height: 80vh;
     align-items: center;
 }
+.boxes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#box1{
+    border: 2px solid black;
+    padding: 2rem;
+}
+
+#box2{
+    border: 2px solid black;
+    padding: 2rem;
+}
+
 #gameContainer {
   position: relative;
   width: 600px;

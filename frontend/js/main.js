@@ -59,6 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
         );
       };
 
+    // Function to fetch additional Pokemon information
+    const fetchPokemonInfo = async (pokemonId) => {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+        const data = await response.json();
+        return data;
+      };
+
+
     // Function to fetch Pokemon sprite
     const fetchPokemonSprite = async (pokemonId) => {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);

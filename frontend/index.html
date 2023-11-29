@@ -8,13 +8,21 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <div id="pokemonSelectionModal">
+        <h2>Select Your Starting Pokemon</h2>
+        <button onclick="selectPokemon(1)">Bulbasaur</button>
+        <button onclick="selectPokemon(2)">Charmander</button>
+        <button onclick="selectPokemon(3)">Squirtle</button>
+      </div>
     <div class="mainContainer">
         <div>
             <h1>Pokemon Game</h1>
             <div class="boxes">
                 <div id="box1">
                     <h4>Your Pokemon</h4>
-                    <ul></ul>
+                    <ul>
+                        <li id="userPokemonName"></li>
+                    </ul>
                 </div>
                 <div id="box2">
                     <h4>Defeated Pokemon</h4>

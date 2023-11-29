@@ -1,8 +1,31 @@
+const pokemonNames = ['Bulbasaur', 'Charmander', 'Squirtle'];
+
+
+function selectPokemon(pokemonId) {
+    selectedPokemon = pokemonId;
+    pokemonSelectionModal.style.display = 'none';
+
+    // Display the user's selected Pokemon
+    const userPokemonName = document.getElementById('userPokemonName');
+    userPokemonName.textContent = `${(pokemonNames[selectedPokemon - 1])}`;
+    document.getElementById('box1').style.display = 'block';
+  }
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const gameContainer = document.getElementById('gameContainer');
     const playerIcon = document.getElementById('playerIcon');
     const pokemonInfoCard = document.getElementById('pokemonInfoCard');
+    const pokemonSelectionModal = document.getElementById('pokemonSelectionModal');
 
+
+    
+    // Variable to store the selected Pokemon
+      let selectedPokemon = null;
+
+      // Show the Pokemon selection modal
+      pokemonSelectionModal.style.display = 'block';
+      
     // Initial position of the player icon
     let playerX = 100;
     let playerY = 0;
@@ -37,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
           playerX += 10;
           break;
         default:
-          return; // Ignore other keys
+          return;
       }
 
       // Ensure the player icon stays within the game container

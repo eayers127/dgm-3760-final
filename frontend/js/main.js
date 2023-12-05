@@ -46,16 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
           // Function to update the player icon position
-    const updatePlayerPosition = async() => {
+    const updatePlayerPosition = () => {
       playerIcon.style.left = `${playerX}px`;
       playerIcon.style.top = `${playerY}px`;
 
-      // const pokemonInfo = await fetchPokemonInfo(data);
-
-
         if ( playerX == 20 && playerY == 20) {
           console.log(`Player is at Pokemon 1`);
-          console.log(`Player is at Pokemon ${pokemonInfo.name}`);
           callPokemon1()
         } else if(playerX == 550 && playerY == 20){
           console.log(`Player is at Pokemon 2`);
@@ -154,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <button onclick="run()">Run</button>
       <button onclick="fight()">Fight</button>
       <button onclick="capture()">Capture</button>
-
     `;
 
     battleOptionsCard.style.display = 'block';
@@ -166,7 +161,7 @@ function callPokemon2(){
       <h2>Ivysaur</h2>
       <button onclick="run()">Run</button>
       <button onclick="fight()">Fight</button>
-
+      <button onclick="capture()">Capture</button>
     `;
 
     battleOptionsCard.style.display = 'block';
@@ -178,7 +173,7 @@ function callPokemon3(){
       <h2>Venusaur</h2>
       <button onclick="run()">Run</button>
       <button onclick="fight()">Fight</button>
-
+      <button onclick="capture()">Capture</button>
     `;
 
     battleOptionsCard.style.display = 'block';
@@ -191,7 +186,7 @@ function callPokemon4(){
       <h2>Charmander</h2>
       <button onclick="run()">Run</button>
       <button onclick="fight()">Fight</button>
-
+      <button onclick="capture()">Capture</button>
     `;
 
     battleOptionsCard.style.display = 'block';

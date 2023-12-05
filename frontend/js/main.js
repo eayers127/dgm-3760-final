@@ -37,9 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       Array.from(document.getElementsByClassName('pokemonIcon')).forEach(pokemonIcon => {
         if (checkCollision(playerIcon, pokemonIcon)) {
-          // Fetch additional Pokemon information
           const pokemonId = pokemonIcon.id.replace('pokemon', '');
-          fetchPokemonInfoAndDisplayCard(pokemonId);
+          fetchPokemonInfo(pokemonId);
         }
         });
     };
@@ -63,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
       }
 
-      // Ensure the player icon stays within the game container
+      // Make sure the player icon stays within the game container
       playerX = Math.max(0, Math.min(playerX, gameContainer.offsetWidth - playerIcon.offsetWidth));
       playerY = Math.max(0, Math.min(playerY, gameContainer.offsetHeight - playerIcon.offsetHeight));
 
@@ -74,12 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const rect1 = element1.getBoundingClientRect();
         const rect2 = element2.getBoundingClientRect();
 
-        return (
+        if (
           rect1.left < rect2.right &&
           rect1.right > rect2.left &&
           rect1.top < rect2.bottom &&
           rect1.bottom > rect2.top
-        );
+        ) {
+          const pokemonId = element2.id.replace('pokemon', '');
+          fetchPokemonInfo(pokemonId);
+          return true;
+        }
+        return false;
       };
 
     // Function to fetch additional Pokemon information
@@ -90,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
 
-    // Function to fetch Pokemon sprite
+    // Function to fetch Pokemon image
     const fetchPokemonSprite = async (pokemonId) => {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
       const data = await response.json();
@@ -106,9 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
       pokemonIcon.style.left = `${posX}px`;
       pokemonIcon.style.top = `${posY}px`;
 
-      // Add event listener for Pokemon icon click
       pokemonIcon.addEventListener('click', async () => {
-        // Fetch additional Pokemon information
         const pokemonInfo = await fetchPokemonInfo(pokemonId);
 
         // Display Pokemon information in the card
@@ -116,7 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <h2>${pokemonInfo.name}</h2>
           <p>Height: ${pokemonInfo.height}</p>
           <p>Weight: ${pokemonInfo.weight}</p>
-          <p>Base Experience: ${pokemonInfo.base_experience}</p>
+          <p>Level: ${pokemonInfo.base_experience}</p>
+          <button onclick="closePokemonInfoCard()">Close</button>
         `;
 
         // Show the Pokemon info card
@@ -138,3 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
   });
+
+  const closePokemonInfoCard = () => {
+    // Hide the Pokemon info card
+    document.getElementById('pokemonInfoCard').style.display = 'none';
+  };

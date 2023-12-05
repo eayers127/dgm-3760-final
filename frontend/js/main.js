@@ -197,6 +197,7 @@ const fight = () => {
   console.log('Fight!');
   //Need logic to determine winner
   //if user wins add to the score and push pokemon to
+  updateScore(10)
 };
 
 const run = () => {
@@ -208,10 +209,20 @@ const capture = () => {
     console.log(randomResult);
     if(randomResult === 1){
       console.log("You captured Bulbasaur!")
+      updateScore(5);
     }else{
       console.log("The Pokemon got away!")
     }
     document.getElementById('battleOptionsCard').style.display = 'none';
 };
+
+const score = document.getElementById('score')
+let currentScore = 0;
+
+
+function updateScore(points){
+  currentScore = currentScore + points;
+  score.innerHTML = currentScore;
+}
 
 

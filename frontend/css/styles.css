@@ -60,6 +60,19 @@
   text-align: center;
 }
 
+#battleOptionsCard {
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  width: 50vw;
+  height: 50vh;
+  display: none;
+  background-color: rgb(255, 152, 152);
+  border: 1px solid #a5a5a5;
+  border-radius: 2rem;
+  padding: 10px;
+}
+
 #pokemonSelectionModal {
     position: fixed;
     top: 50%;

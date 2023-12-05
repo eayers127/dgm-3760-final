@@ -1,5 +1,9 @@
 const pokemonNames = ['Bulbasaur', 'Charmander', 'Squirtle'];
 
+  // Initial position of the player icon
+  let playerX = 100;
+  let playerY = 100;
+
 
 function selectPokemon(pokemonId) {
     selectedPokemon = pokemonId;
@@ -25,25 +29,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Show the Pokemon selection modal
       pokemonSelectionModal.style.display = 'block';
-      
-    // Initial position of the player icon
-    let playerX = 100;
-    let playerY = 0;
 
     // Function to update the player icon position
     const updatePlayerPosition = () => {
       playerIcon.style.left = `${playerX}px`;
       playerIcon.style.top = `${playerY}px`;
 
-      Array.from(document.getElementsByClassName('pokemonIcon')).forEach(pokemonIcon => {
-        if (checkCollision(playerIcon, pokemonIcon)) {
-          const pokemonId = pokemonIcon.id.replace('pokemon', '');
-          fetchPokemonInfo(pokemonId);
+        if ( playerX == 20 && playerY == 20) {
+          console.log(`Player is at Pokemon 1`);
+          callPokemon1()
+        } else if(playerX == 20 && playerY == 550){
+          console.log(`Player is at Pokemon 2`);
+          callPokemon2()
+        }else if(playerX == 550 && playerY == 20){
+          console.log(`Player is at Pokemon 3`);
+          callPokemon3()
+        }else if(playerX == 550 && playerY == 550){
+          console.log(`Player is at Pokemon 4`);
+          callPokemon4()
         }
-        });
+      
     };
 
-    // Function to handle arrow key presses
     const handleKeyPress = (event) => {
       switch (event.key) {
         case 'ArrowUp':
@@ -69,22 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Update the player icon position
       updatePlayerPosition();
     };
-    const checkCollision = (element1, element2) => {
-        const rect1 = element1.getBoundingClientRect();
-        const rect2 = element2.getBoundingClientRect();
-
-        if (
-          rect1.left < rect2.right &&
-          rect1.right > rect2.left &&
-          rect1.top < rect2.bottom &&
-          rect1.bottom > rect2.top
-        ) {
-          const pokemonId = element2.id.replace('pokemon', '');
-          fetchPokemonInfo(pokemonId);
-          return true;
-        }
-        return false;
-      };
 
     // Function to fetch additional Pokemon information
     const fetchPokemonInfo = async (pokemonId) => {
@@ -127,13 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
 
-    // Add event listener for key presses
     document.addEventListener('keydown', handleKeyPress);
 
-    // Initial setup of the player icon position
     updatePlayerPosition();
 
-    // Initial setup of Pokemon icons in the four corners
     updatePokemonPosition(1, 10, 10);
     updatePokemonPosition(2, gameContainer.offsetWidth - 60, 10);
     updatePokemonPosition(3, 10, gameContainer.offsetHeight - 60);
@@ -146,3 +134,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hide the Pokemon info card
     document.getElementById('pokemonInfoCard').style.display = 'none';
   };
+
+  function callPokemon1(){
+  // const fetchPokemonInfoAndDisplayBattleOptions = async (pokemonId) => {
+  //   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+  //   const pokemonInfo = await response.json();
+
+    const battleOptionsCard = document.getElementById('battleOptionsCard');
+    battleOptionsCard.innerHTML = `
+      <h2>Bulbasaur</h2>
+      <button onclick="run()">Run</button>
+      <button onclick="fight()">Fight</button>
+
+    `;
+
+    battleOptionsCard.style.display = 'block';
+  // };
+
+};
+
+
+const fight = () => {
+  console.log('Fight!');
+  //Need logic to determine winner
+  //if user wins add to the score and push pokemon to
+};
+
+const run = () => {
+  document.getElementById('battleOptionsCard').style.display = 'none';
+};
+

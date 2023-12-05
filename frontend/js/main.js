@@ -4,6 +4,14 @@ const pokemonNames = ['Bulbasaur', 'Charmander', 'Squirtle'];
   let playerX = 100;
   let playerY = 100;
 
+  const getRandomNumber = () => {
+    const randomNum = Math.random();
+    const randomOneOrTwo = randomNum * 2;
+
+    const randomNumber = Math.floor(randomOneOrTwo) + 1;
+
+    return randomNumber;
+  }
 
 function selectPokemon(pokemonId) {
     selectedPokemon = pokemonId;
@@ -30,18 +38,29 @@ document.addEventListener('DOMContentLoaded', () => {
       // Show the Pokemon selection modal
       pokemonSelectionModal.style.display = 'block';
 
-    // Function to update the player icon position
-    const updatePlayerPosition = () => {
+    // Function to fetch additional Pokemon information
+    const fetchPokemonInfo = async (pokemonId) => {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
+        const data = await response.json();
+        return data;
+      };
+
+          // Function to update the player icon position
+    const updatePlayerPosition = async() => {
       playerIcon.style.left = `${playerX}px`;
       playerIcon.style.top = `${playerY}px`;
 
+      // const pokemonInfo = await fetchPokemonInfo(data);
+
+
         if ( playerX == 20 && playerY == 20) {
           console.log(`Player is at Pokemon 1`);
+          console.log(`Player is at Pokemon ${pokemonInfo.name}`);
           callPokemon1()
-        } else if(playerX == 20 && playerY == 550){
+        } else if(playerX == 550 && playerY == 20){
           console.log(`Player is at Pokemon 2`);
           callPokemon2()
-        }else if(playerX == 550 && playerY == 20){
+        }else if(playerX == 20 && playerY == 550){
           console.log(`Player is at Pokemon 3`);
           callPokemon3()
         }else if(playerX == 550 && playerY == 550){
@@ -76,13 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Update the player icon position
       updatePlayerPosition();
     };
-
-    // Function to fetch additional Pokemon information
-    const fetchPokemonInfo = async (pokemonId) => {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-        const data = await response.json();
-        return data;
-      };
 
 
     // Function to fetch Pokemon image
@@ -136,21 +148,53 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function callPokemon1(){
-  // const fetchPokemonInfoAndDisplayBattleOptions = async (pokemonId) => {
-  //   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-  //   const pokemonInfo = await response.json();
-
     const battleOptionsCard = document.getElementById('battleOptionsCard');
     battleOptionsCard.innerHTML = `
       <h2>Bulbasaur</h2>
+      <button onclick="run()">Run</button>
+      <button onclick="fight()">Fight</button>
+      <button onclick="capture()">Capture</button>
+
+    `;
+
+    battleOptionsCard.style.display = 'block';
+};
+
+function callPokemon2(){
+    const battleOptionsCard = document.getElementById('battleOptionsCard');
+    battleOptionsCard.innerHTML = `
+      <h2>Ivysaur</h2>
       <button onclick="run()">Run</button>
       <button onclick="fight()">Fight</button>
 
     `;
 
     battleOptionsCard.style.display = 'block';
-  // };
+};
 
+function callPokemon3(){
+    const battleOptionsCard = document.getElementById('battleOptionsCard');
+    battleOptionsCard.innerHTML = `
+      <h2>Venusaur</h2>
+      <button onclick="run()">Run</button>
+      <button onclick="fight()">Fight</button>
+
+    `;
+
+    battleOptionsCard.style.display = 'block';
+
+};
+
+function callPokemon4(){
+    const battleOptionsCard = document.getElementById('battleOptionsCard');
+    battleOptionsCard.innerHTML = `
+      <h2>Charmander</h2>
+      <button onclick="run()">Run</button>
+      <button onclick="fight()">Fight</button>
+
+    `;
+
+    battleOptionsCard.style.display = 'block';
 };
 
 
@@ -163,4 +207,16 @@ const fight = () => {
 const run = () => {
   document.getElementById('battleOptionsCard').style.display = 'none';
 };
+
+const capture = () => {
+    const randomResult = getRandomNumber();
+    console.log(randomResult);
+    if(randomResult === 1){
+      console.log("You captured Bulbasaur!")
+    }else{
+      console.log("The Pokemon got away!")
+    }
+    document.getElementById('battleOptionsCard').style.display = 'none';
+};
+
 

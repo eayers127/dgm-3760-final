@@ -29,9 +29,16 @@
   border: 2px solid black;
   height: 100px;
   padding: 0 .5rem .5rem .5rem;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 #score{
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+#lives{
   text-align: center;
   padding-bottom: 4px;
 }
@@ -61,7 +68,7 @@
   top: 25%;
   left: 25%;
   display: none;
-  background-color: rgb(171, 255, 160);
+  background-color: rgb(149, 177, 255);
   border: 1px solid #a5a5a5;
   border-radius: 2rem;
   padding: 10px;
@@ -78,10 +85,24 @@
   width: 50vw;
   height: 50vh;
   display: none;
+  background-color: rgb(179, 255, 179);
+  border: 1px solid #a5a5a5;
+  border-radius: 2rem;
+  padding: 10px;
+}
+
+#gameOver {
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  width: 50vw;
+  height: 50vh;
+  display: none;
   background-color: rgb(255, 152, 152);
   border: 1px solid #a5a5a5;
   border-radius: 2rem;
   padding: 10px;
+  z-index: 100;
 }
 
 #pokemonSelectionModal {

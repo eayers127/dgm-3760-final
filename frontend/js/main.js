@@ -192,13 +192,34 @@ function callPokemon4(){
     battleOptionsCard.style.display = 'block';
 };
 
+const lives = document.getElementById('currentLives')
+let currentLives = 3;
+
+function updateLives(){
+  currentLives = currentLives - 1;
+  lives.innerHTML = currentLives;
+}
+
 
 const fight = () => {
   console.log('Fight!');
-  //Need logic to determine winner
-  //if user wins add to the score and push pokemon to
-  updateScore(10)
+  const randomFightResult = getRandomNumber();
+  console.log(randomFightResult);
+  if(randomFightResult === 1){
+    console.log("You defeated Bulbasaur!")
+    updateScore(10);
+  }else{
+    console.log("You lost!")
+    updateLives();
+    gameOver();
+  }
 };
+
+function gameOver() {
+  if(currentLives === 0){
+    document.getElementById('gameOver').style.display = 'block';
+  }
+}
 
 const run = () => {
   document.getElementById('battleOptionsCard').style.display = 'none';
@@ -216,7 +237,7 @@ const capture = () => {
     document.getElementById('battleOptionsCard').style.display = 'none';
 };
 
-const score = document.getElementById('score')
+const score = document.getElementById('currentScore')
 let currentScore = 0;
 
 

@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <h2>Bulbasaur</h2>
       <button onclick="run()">Run</button>
       <button onclick="fight('Bulbasaur')">Fight</button>
-      <button onclick="capture()">Capture</button>
+      <button onclick="capture('Bulbasaur')">Capture</button>
     `;
 
     battleOptionsCard.style.display = 'block';
@@ -169,7 +169,7 @@ function callPokemon2(){
       <h2>Ivysaur</h2>
       <button onclick="run()">Run</button>
       <button onclick="fight('Ivysaur')">Fight</button>
-      <button onclick="capture()">Capture</button>
+      <button onclick="capture('Ivysaur')">Capture</button>
     `;
 
     battleOptionsCard.style.display = 'block';
@@ -181,7 +181,7 @@ function callPokemon3(){
       <h2>Venusaur</h2>
       <button onclick="run()">Run</button>
       <button onclick="fight('Venusaur')">Fight</button>
-      <button onclick="capture()">Capture</button>
+      <button onclick="capture('Venusaur')">Capture</button>
     `;
 
     battleOptionsCard.style.display = 'block';
@@ -195,7 +195,7 @@ function callPokemon4(){
       <h2>Charmander</h2>
       <button onclick="run()">Run</button>
       <button onclick="fight('Charmander')">Fight</button>
-      <button onclick="capture()">Capture</button>
+      <button onclick="capture('Charmander')">Capture</button>
     `;
 
     battleOptionsCard.style.display = 'block';
@@ -254,18 +254,37 @@ const run = () => {
   document.getElementById('battleOptionsCard').style.display = 'none';
 };
 
-const capture = () => {
+const capture = (name) => {
     const randomResult = getRandomNumber();
     console.log(randomResult);
     if(randomResult === 1){
       console.log("You captured Bulbasaur!")
-      pokemonCaptured();
+      pokemonCaptured(name);
+      updateCapturedPokemon(name);
       updateScore(5);
     }else{
       console.log("The Pokemon got away!")
       pokemonRan();
     }
     document.getElementById('battleOptionsCard').style.display = 'none';
+};
+
+const capturedPokemon = [];
+
+const updateCapturedPokemon = (pokemonName) => {
+  capturedPokemon.push(pokemonName);
+  updateCapturedPokemonList();
+}
+
+const updateCapturedPokemonList = () => {
+  const capturedPokemonListElement = document.getElementById('capturedPokemon');
+  capturedPokemonListElement.innerHTML = '';
+
+  capturedPokemon.forEach((pokemonName) => {
+    const listItem = document.createElement('li');
+    listItem.textContent = pokemonName;
+    capturedPokemonListElement.appendChild(listItem);
+  });
 };
 
 const score = document.getElementById('currentScore')
@@ -279,9 +298,9 @@ function updateScore(points){
 
 const captured = document.getElementById('captured');
 
-function pokemonCaptured(){  
+function pokemonCaptured(name){  
   captured.innerHTML = 
-  `<h2>The Pokemon was captured!</h2>
+  `<h2>${name} was captured!</h2>
   <p>It was added to your Pokemon</p>
   <p>You earned 5 points</p>
   <button onclick="closeCapture()">Close</button>`;
@@ -297,9 +316,9 @@ function pokemonRan(){
 
 const fightBox = document.getElementById('defeated');
 
-function pokemonDefeated(){
+function pokemonDefeated(name){
   fightBox.innerHTML = 
-  `<h2>You defeated the Pokemon!</h2>
+  `<h2>You defeated the ${name}</h2>
   <p>The Pokemon was added to your list of defeated Pokemon</p>
   <p>You gained 10 points</p>
   <button onclick="closeFightBox()">Close</button>`;

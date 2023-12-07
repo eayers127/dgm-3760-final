@@ -91,6 +91,32 @@
   padding: 10px;
 }
 
+#captured {
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  width: 50vw;
+  height: 50vh;
+  display: none;
+  background-color: rgb(179, 255, 179);
+  border: 1px solid #a5a5a5;
+  border-radius: 2rem;
+  padding: 10px;
+}
+
+#defeated {
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  width: 50vw;
+  height: 50vh;
+  display: none;
+  background-color: rgb(179, 255, 179);
+  border: 1px solid #a5a5a5;
+  border-radius: 2rem;
+  padding: 10px;
+}
+
 #gameOver {
   position: fixed;
   top: 25%;

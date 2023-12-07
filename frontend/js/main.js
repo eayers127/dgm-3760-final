@@ -180,8 +180,9 @@ function callPokemon3(){
 
 };
 
+const battleOptionsCard = document.getElementById('battleOptionsCard');
+
 function callPokemon4(){
-    const battleOptionsCard = document.getElementById('battleOptionsCard');
     battleOptionsCard.innerHTML = `
       <h2>Charmander</h2>
       <button onclick="run()">Run</button>
@@ -207,9 +208,11 @@ const fight = () => {
   console.log(randomFightResult);
   if(randomFightResult === 1){
     console.log("You defeated Bulbasaur!")
+    pokemonDefeated();
     updateScore(10);
   }else{
     console.log("You lost!")
+    defeated();
     updateLives();
     gameOver();
   }
@@ -230,9 +233,11 @@ const capture = () => {
     console.log(randomResult);
     if(randomResult === 1){
       console.log("You captured Bulbasaur!")
+      pokemonCaptured();
       updateScore(5);
     }else{
       console.log("The Pokemon got away!")
+      pokemonRan();
     }
     document.getElementById('battleOptionsCard').style.display = 'none';
 };
@@ -245,5 +250,35 @@ function updateScore(points){
   currentScore = currentScore + points;
   score.innerHTML = currentScore;
 }
+
+const captured = document.getElementById('captured');
+
+function pokemonCaptured(){  
+  captured.innerHTML = 
+  `<h2>The Pokemon was captured!</h2>
+  <p>It was added to your Pokemon</p>
+  <p>You earned 5 points</p>
+  <button onclick="closeCapture()">Close</button>`;
+  captured.style.display = 'block';
+};
+
+function pokemonRan(){
+  captured.innerHTML = 
+  `<h2>The Pokemon ran away!</h2>
+  <button onclick="closeCapture()">Close</button>`;
+  captured.style.display = 'block';
+};
+
+function pokemonDefeated(){
+
+};
+
+function defeated(){
+
+};
+
+const closeCapture = () => {
+  captured.style.display = 'none';
+};
 
 

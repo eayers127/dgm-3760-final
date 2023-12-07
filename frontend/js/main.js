@@ -216,6 +216,7 @@ const fight = () => {
     updateLives();
     gameOver();
   }
+  document.getElementById('battleOptionsCard').style.display = 'none';
 };
 
 function gameOver() {
@@ -269,16 +270,31 @@ function pokemonRan(){
   captured.style.display = 'block';
 };
 
-function pokemonDefeated(){
+const fightBox = document.getElementById('defeated');
 
+function pokemonDefeated(){
+  fightBox.innerHTML = 
+  `<h2>You defeated the Pokemon!</h2>
+  <p>The Pokemon was added to your list of defeated Pokemon</p>
+  <p>You gained 10 points</p>
+  <button onclick="closeFightBox()">Close</button>`;
+  fightBox.style.display = 'block';
 };
 
 function defeated(){
-
+  fightBox.innerHTML = 
+  `<h2>You were defeated</h2>
+  <p>You lost a life</p>
+  <button onclick="closeFightBox()">Close</button>`;
+  fightBox.style.display = 'block';
 };
 
 const closeCapture = () => {
   captured.style.display = 'none';
+};
+
+const closeFightBox = () => {
+  fightBox.style.display = 'none';
 };
 
 

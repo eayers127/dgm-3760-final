@@ -1,5 +1,9 @@
 const pokemonNames = ['Bulbasaur', 'Charmander', 'Squirtle'];
 
+const pokemonList = document.getElementById('pokemonList');
+
+const defeatedPokemon = [];
+
   // Initial position of the player icon
   let playerX = 100;
   let playerY = 100;
@@ -143,16 +147,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('pokemonInfoCard').style.display = 'none';
   };
 
+  let currentPokemon = '';
+
   function callPokemon1(){
     const battleOptionsCard = document.getElementById('battleOptionsCard');
     battleOptionsCard.innerHTML = `
       <h2>Bulbasaur</h2>
       <button onclick="run()">Run</button>
-      <button onclick="fight()">Fight</button>
+      <button onclick="fight('Bulbasaur')">Fight</button>
       <button onclick="capture()">Capture</button>
     `;
 
     battleOptionsCard.style.display = 'block';
+
+    return currentPokemon = 'Bulbasaur'
 };
 
 function callPokemon2(){
@@ -160,7 +168,7 @@ function callPokemon2(){
     battleOptionsCard.innerHTML = `
       <h2>Ivysaur</h2>
       <button onclick="run()">Run</button>
-      <button onclick="fight()">Fight</button>
+      <button onclick="fight('Ivysaur')">Fight</button>
       <button onclick="capture()">Capture</button>
     `;
 
@@ -172,7 +180,7 @@ function callPokemon3(){
     battleOptionsCard.innerHTML = `
       <h2>Venusaur</h2>
       <button onclick="run()">Run</button>
-      <button onclick="fight()">Fight</button>
+      <button onclick="fight('Venusaur')">Fight</button>
       <button onclick="capture()">Capture</button>
     `;
 
@@ -186,7 +194,7 @@ function callPokemon4(){
     battleOptionsCard.innerHTML = `
       <h2>Charmander</h2>
       <button onclick="run()">Run</button>
-      <button onclick="fight()">Fight</button>
+      <button onclick="fight('Charmander')">Fight</button>
       <button onclick="capture()">Capture</button>
     `;
 
@@ -202,13 +210,14 @@ function updateLives(){
 }
 
 
-const fight = () => {
+const fight = (name) => {
   console.log('Fight!');
   const randomFightResult = getRandomNumber();
   console.log(randomFightResult);
   if(randomFightResult === 1){
     console.log("You defeated Bulbasaur!")
-    pokemonDefeated();
+    pokemonDefeated(name);
+    updateDefeatedPokemon(name);
     updateScore(10);
   }else{
     console.log("You lost!")
@@ -217,6 +226,22 @@ const fight = () => {
     gameOver();
   }
   document.getElementById('battleOptionsCard').style.display = 'none';
+};
+
+const updateDefeatedPokemon = (pokemonName) => {
+  defeatedPokemon.push(pokemonName);
+  updateDefeatedPokemonList();
+}
+
+const updateDefeatedPokemonList = () => {
+  const defeatedPokemonListElement = document.getElementById('defeatedPokemon');
+  defeatedPokemonListElement.innerHTML = '';
+
+  defeatedPokemon.forEach((pokemonName) => {
+    const listItem = document.createElement('li');
+    listItem.textContent = pokemonName;
+    defeatedPokemonListElement.appendChild(listItem);
+  });
 };
 
 function gameOver() {

@@ -250,6 +250,8 @@ function gameOver() {
     document.getElementById('gameOver').style.display = 'block';
 
     sendGameOverDataToServer(currentScore);
+    const playAgainButton = document.querySelector('#gameOver button');
+    playAgainButton.addEventListener('click', restartGame);
   }
 }
 
@@ -343,6 +345,10 @@ const closeCapture = () => {
 
 const closeFightBox = () => {
   fightBox.style.display = 'none';
+};
+
+const restartGame = () => {
+  location.reload();
 };
 
 const sendDefeatedPokemonToServer = async (defeatedPokemon) => {

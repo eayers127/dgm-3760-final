@@ -219,6 +219,7 @@ const fight = (name) => {
     pokemonDefeated(name);
     updateDefeatedPokemon(name);
     updateScore(10);
+    sendDefeatedPokemonToServer(name)
   }else{
     console.log("You lost!")
     defeated();
@@ -262,6 +263,7 @@ const capture = (name) => {
       pokemonCaptured(name);
       updateCapturedPokemon(name);
       updateScore(5);
+      sendCapturedPokemonToServer(name);
     }else{
       console.log("The Pokemon got away!")
       pokemonRan();
@@ -341,4 +343,43 @@ const closeFightBox = () => {
   fightBox.style.display = 'none';
 };
 
+const sendDefeatedPokemonToServer = async (defeatedPokemon) => {
+  try {
+    const response = await fetch('http://localhost:3000/defeated', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ defeatedPokemon }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to send defeated Pokemon data to the server');
+    }
+
+    console.log('Defeated Pokemon data sent successfully!');
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+const sendCapturedPokemonToServer = async (capturedPokemon) => {
+  try {
+    const response = await fetch('http://localhost:3000/captured', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ capturedPokemon }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to send captured Pokemon data to the server');
+    }
+
+    console.log('Captured Pokemon data sent successfully!');
+  } catch (error) {
+    console.error(error.message);
+  }
+};
 

@@ -219,7 +219,7 @@ const fight = (name) => {
     pokemonDefeated(name);
     updateDefeatedPokemon(name);
     updateScore(10);
-    sendDefeatedPokemonToServer(name)
+    sendDefeatedPokemonToServer(name);
   }else{
     console.log("You lost!")
     defeated();
@@ -248,6 +248,8 @@ const updateDefeatedPokemonList = () => {
 function gameOver() {
   if(currentLives === 0){
     document.getElementById('gameOver').style.display = 'block';
+
+    sendGameOverDataToServer(currentScore);
   }
 }
 
@@ -380,6 +382,29 @@ const sendCapturedPokemonToServer = async (capturedPokemon) => {
     console.log('Captured Pokemon data sent successfully!');
   } catch (error) {
     console.error(error.message);
+  }
+};
+
+
+const sendGameOverDataToServer = async (currentScore) => {
+  try {
+    const response = await fetch('http://localhost:3000/gameover', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        currentScore,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Server responded with status ${response.status}`);
+    }
+
+    console.log('Game over data sent successfully.');
+  } catch (error) {
+    console.error('Error sending game over data:', error.message);
   }
 };
 
